@@ -20,7 +20,10 @@ public class EmployeeService {
      * @return
      */
     public List<Employee> getAll() {
-        return employeeMapper.selectByExampleWithDept(null);
+        EmployeeExample employeeExample = new EmployeeExample();
+        //按照部门id排序，防止乱序
+        employeeExample.setOrderByClause("emp_id");
+        return employeeMapper.selectByExampleWithDept(employeeExample);
     }
 
     public void saveEmp(Employee employee) {
